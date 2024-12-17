@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Grid Modal</title>
+    <style>
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            /* Adjust for desired grid layout */
+            gap: 5px;
+            /* Spacing between grid items */
+        }
+
+        .grid-item img {
+            width: 80%;
+            height: auto;
+            cursor: pointer;
+            /* Indicate clickable image */
+        }
+
+        .modal {
+            display: none;
+            /* Hidden by default */
+            position: fixed;
+            /* Stay in place */
+            z-index: 1;
+            /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%;
+            /* Full width */
+            height: 100%;
+            /* Full height */
+            overflow: auto;
+            /* Enable scroll if needed */
+            background-color: rgba(0, 0, 0, 0.9);
+            /* Black w/ opacity */
+        }
+
+        .modal-content {
+            margin: auto;
+            display: block;
+            width: 80%;
+            /* Adjust as needed */
+            max-width: 700px;
+            /* Limit maximum width */
+        }
+
+        .close {
+            color: white;
+            position: absolute;
+            top: 10px;
+            right: 25px;
+            font-size: 35px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        h1 {
+            text-align: center;
+            font-family: "Poppins", sans-serif;
+            text-transform: uppercase;
+            padding: 0;
+            margin: 0;
+            margin-top: 40px;
+            letter-spacing: 4px;
+            color: #e43434;
+        }
+
+        .image-comparison {
+            max-width: 700px;
+            margin: 20px auto;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .image-comparison img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: left;
+        }
+
+        .image-comparison .images-container {
+            position: relative;
+            display: flex;
+        }
+
+        .image-comparison .images-container .before-image {
+            position: absolute;
+            top: 0;
+            width: 50%;
+        }
+
+        .image-comparison .slider {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .image-comparison .slider-line {
+            position: absolute;
+            height: 100%;
+            width: 4px;
+            background: #fff;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .image-comparison .slider-icon {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 60px;
+            height: 60px;
+            color: #fff;
+            transform: translate(-50%, -50%) rotateZ(90deg);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="grid-container">
+        <div class="grid-item">
+            <img src="./images/image1.png" alt="Image 1" onclick="openModal(this)">
+        </div>
+        <div class="grid-item">
+            <img src="./images/image2.png" alt="Image 2" onclick="openModal(this)">
+        </div>
+        <div class="grid-item">
+            <img src="./images/image3.png" alt="Image 3" onclick="openModal(this)">
+        </div>
+        <div class="grid-item">
+            <img src="./images/image4.png" alt="Image 4" onclick="openModal(this)">
+        </div>
+    </div>
+
+    <div id="myModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+
+        <div class="image-comparison">
+            <div class="images-container">
+                <img class="before-image" src="/images/image1.png" alt="" />
+                <img class="after-image" src="/images/image2.png" alt="" />
+
+                <div class="slider-line"></div>
+                <div class="slider-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
+                    </svg>
+                </div>
+
+                <input type="range" class="slider" min="0" max="100" />
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let overlayImage = document.getElementById("img02");  // Store a reference
+        function openModal(img) {
+            var modal = document.getElementById("myModal");
+            var modalImg = document.getElementById("img01");
+            modal.style.display = "block";
+            modalImg.src = img.src;
+            overlayImage.src = "./images/overlay.png"; // Set overlay image path
+            overlayImage.style.setProperty('--clip', '100%'); // Initially fully covered
+        }
+        function updateClip(percent) {
+            overlayImage.style.setProperty('--clip', `${percent}%`);
+        }
+
+        function closeModal() {
+            var modal = document.getElementById("myModal");
+            modal.style.display = "none";
+        }
+        const slider = document.querySelector(".image-comparison .slider");
+        const beforeImage = document.querySelector(".image-comparison .before-image");
+        const sliderLine = document.querySelector(".image-comparison .slider-line");
+        const sliderIcon = document.querySelector(".image-comparison .slider-icon");
+
+        slider.addEventListener("input", (e) => {
+            let sliderValue = e.target.value + "%";
+
+            beforeImage.style.width = sliderValue;
+            sliderLine.style.left = sliderValue;
+            sliderIcon.style.left = sliderValue;
+        });
+    </script>
+
+</body>
+
+</html>
