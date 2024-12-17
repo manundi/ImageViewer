@@ -1,0 +1,139 @@
+body {
+    background-color: black;
+    overflow: hidden;
+    margin: 0; /* Remove default body margin */
+}
+
+.container {
+    display: flex;
+    align-items: stretch;  
+    justify-content: center;
+    height: 80vh;      
+    width: 100vw;     
+    max-width: 2000px;   
+}
+
+#left-controls,
+#right-controls {
+    margin: 55px;
+    width: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Vertically center the buttons */
+}
+#right-arrow {
+    transform: rotate(180deg);
+    
+}
+
+#comparison {
+    flex-grow: 1;
+    margin: 0 10px;
+    position: relative; 
+    overflow: hidden;
+}
+
+
+figure {
+    background-image: url(./images/Kuvapari_1A.png); 
+    background-size:cover;
+    width: 100%;
+    height: 100%; 
+    margin: 0;
+}
+
+#divisor {
+    background-image: url(./images/Kuvapari_1B.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    box-shadow: 0 5px 10px -2px rgba(0, 0, 0, 0.3);
+    bottom: 0;
+
+    
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      right: -2px;
+      width: 4px;
+      height: calc(50% - 25px);
+      background: white;
+      z-index: 3;
+    }
+    &::before {
+      top: 0;
+      box-shadow: 0 -3px 8px 1px rgba(0,0,0,.3);
+    }
+    &::after {
+      bottom: 0;
+      box-shadow: 0 3px 8px 1px rgba(0,0,0,.3);
+    }
+  }
+  #handle {
+    position: absolute;
+    height: 50px;
+    width: 50px;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
+    z-index: 1;
+    
+    &::before,
+    &::after {
+      content: '';
+      width: 0;
+      height: 0;
+      border: 6px inset transparent;
+      position: absolute;
+      top: 50%;
+      margin-top: -6px;
+    }
+    &::before {
+      border-right: 6px solid white;
+      left: 50%;
+      margin-left: -17px;
+    }
+    &::after {
+      border-left: 6px solid white;
+      right: 50%;
+      margin-right: -17px;
+    }
+  }
+  
+  input[type=range]{
+      -webkit-appearance:none;
+      -moz-appearance:none;
+      position: absolute;
+      top: 50%; left: -25px;
+    transform: translateY(-50%);
+      background-color: transparent;
+      width: calc(100% + 50px); 
+    z-index: 2;
+    
+    &:focus,
+    &:active {
+      border: none;
+      outline: none;
+    }
+  }
+  input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    border: none;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    background: transparent;
+    border: 4px solid #fff;
+    box-shadow: 0 0 8px 1px rgba(0,0,0,.3);
+  }
+  input[type=range]::-moz-range-track {
+      -moz-appearance:none;
+      height:15px;
+      width: 100%;
+      background-color: transparent; 
+      position: relative;
+      outline: none;    
+  }
