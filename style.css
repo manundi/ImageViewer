@@ -2,76 +2,64 @@ body {
     background-color: black;
     overflow: hidden;
     margin: 0; /* Remove default body margin */
+    padding: 50px;
+ 
 }
-
 .container {
-    display: flex;
-    align-items: stretch;  
-    justify-content: center;
-    height: 80vh;      
-    width: 100vw;     
-    max-width: 2000px;   
-}
+  display: flex;
+  align-items: stretch;  
+  justify-content: center;
+  height: 90vh;     
 
+}
 #left-controls,
 #right-controls {
     margin: 55px;
     width: 50px;
     display: flex;
     flex-direction: column;
-    justify-content: center; /* Vertically center the buttons */
+    justify-content: center; 
 }
 #right-arrow {
-    transform: rotate(180deg);
-    
+    transform: rotate(180deg); 
 }
 
 #comparison {
     flex-grow: 1;
-    margin: 0 10px;
     position: relative; 
     overflow: hidden;
 }
 
 
+
 figure {
-    background-image: url(./images/Kuvapari_1A.png); 
-    background-size:cover;
-    width: 100%;
-    height: 100%; 
-    margin: 0;
+  background-image: url(./images/Kuvapari_1A.png); 
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  position: absolute;
+  width: 100%;
+  height: 101%;
+  margin: 0;
+  z-index: 1; 
 }
 
 #divisor {
-    background-image: url(./images/Kuvapari_1B.png);
-    background-size: cover;
-    background-repeat: no-repeat;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    box-shadow: 0 5px 10px -2px rgba(0, 0, 0, 0.3);
-    bottom: 0;
+  background-image: url(./images/Kuvapari_1B.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: black;
 
-    
-    &::before,
-    &::after {
-      content: '';
-      position: absolute;
-      right: -2px;
-      width: 4px;
-      height: calc(50% - 25px);
-      background: white;
-      z-index: 3;
-    }
-    &::before {
-      top: 0;
-      box-shadow: 0 -3px 8px 1px rgba(0,0,0,.3);
-    }
-    &::after {
-      bottom: 0;
-      box-shadow: 0 3px 8px 1px rgba(0,0,0,.3);
-    }
-  }
+  position: absolute;
+  width: 100%; 
+  height: 100%;
+  z-index: 2; 
+  overflow: hidden; 
+  clip-path: inset(0 0 0 0); 
+ 
+}
+
   #handle {
     position: absolute;
     height: 50px;
@@ -79,7 +67,7 @@ figure {
     top: 50%;
     left: 50%;
     transform: translateY(-50%) translateX(-50%);
-    z-index: 1;
+    z-index: 3;
     
     &::before,
     &::after {
@@ -122,12 +110,13 @@ figure {
   input[type=range]::-webkit-slider-thumb {
     -webkit-appearance: none;
     border: none;
-    height: 50px;
+    height: 1600px;
     width: 50px;
     border-radius: 50%;
+    display: inline;
     background: transparent;
-    border: 4px solid #fff;
-    box-shadow: 0 0 8px 1px rgba(0,0,0,.3);
+    border: 4px solid #ffffff00;
+
   }
   input[type=range]::-moz-range-track {
       -moz-appearance:none;

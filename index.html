@@ -7,6 +7,19 @@
     <title>Image Grid Modal</title>
     <link rel="stylesheet" type="text/css" href="style.css">
 
+    <link rel="preload" href="./images/Kuvapari_1A.png" as="image">
+    <link rel="preload" href="./images/Kuvapari_1B.png" as="image">
+    <link rel="preload" href="./images/Kuvapari_2A.png" as="image">
+    <link rel="preload" href="./images/Kuvapari_2B.png" as="image">
+    <link rel="preload" href="./images/Kuvapari_3A.png" as="image">
+    <link rel="preload" href="./images/Kuvapari_3B.png" as="image">
+    <link rel="preload" href="./images/Kuvapari_4A.png" as="image">
+    <link rel="preload" href="./images/Kuvapari_4B.png" as="image">
+    <link rel="preload" href="images/nuoli.svg" as="image">
+</head>
+
+<body>
+
     <div class="container">
         <div id="left-controls">
             <img src="images/nuoli.svg" id="left-arrow" alt="">
@@ -29,14 +42,54 @@
             slider = document.getElementById("slider");
 
         function moveDivisor() {
-            handle.style.left = slider.value + "%";
-            divisor.style.width = slider.value + "%";
+            const value = slider.value;
+            divisor.style.clipPath = `inset(0 ${100 - value}% 0 0)`;
+            handle.style.left = value + "%";
         }
+
+
 
         window.onload = function () {
             moveDivisor();
         };
+
+        // Get references to the elements
+        const leftControls = document.getElementById('left-controls');
+        const rightControls = document.getElementById('right-controls');
+        const figure = document.querySelector('figure');
+        const imagePairs = [
+            { a: './images/Kuvapari_1A.png', b: './images/Kuvapari_1B.png' },
+            { a: './images/Kuvapari_2A.png', b: './images/Kuvapari_2B.png' },
+            { a: './images/Kuvapari_3A.png', b: './images/Kuvapari_3B.png' },
+            { a: './images/Kuvapari_4A.png', b: './images/Kuvapari_4B.png' },
+            // Add more image pairs as needed
+        ];
+        let currentPairIndex = 0;
+
+        // Function to update the images
+        function updateImages(index) {
+            figure.style.backgroundImage = `url(${imagePairs[index].a})`;
+            divisor.style.backgroundImage = `url(${imagePairs[index].b})`;
+
+            slider.value = 50;
+            moveDivisor();
+        }
+
+        // Event listeners for the controls
+        leftControls.addEventListener('click', () => {
+            currentPairIndex = (currentPairIndex - 1 + imagePairs.length) % imagePairs.length; // Decrement index, wrapping around
+            updateImages(currentPairIndex);
+        });
+
+        rightControls.addEventListener('click', () => {
+            currentPairIndex = (currentPairIndex + 1) % imagePairs.length; // Increment index, wrapping around
+            updateImages(currentPairIndex);
+        });
+
+
+        // Initial image setup
+        updateImages(currentPairIndex);
     </script>
-    </body>
+</body>
 
 </html>
