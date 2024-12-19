@@ -66,8 +66,9 @@ figure {
     width: 50px;
     top: 50%;
     left: 50%;
-    transform: translateY(-50%) translateX(-50%);
+    transform: translateY(-50%) translateX(-50%) scale(2.0);
     z-index: 3;
+    
     
     &::before,
     &::after {
@@ -111,7 +112,7 @@ figure {
     -webkit-appearance: none;
     border: none;
     height: 1600px;
-    width: 50px;
+    width: 200px;
     border-radius: 50%;
     display: inline;
     background: transparent;
