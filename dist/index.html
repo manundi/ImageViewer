@@ -33,21 +33,22 @@
         </div>
         <div id="right-controls">
             <img src="images/nuoli.svg" id="right-arrow" alt="">
+            <div id="image-index">
+            </div>
         </div>
     </div>
 
     <script>
         let divisor = document.getElementById("divisor"),
             handle = document.getElementById("handle"),
-            slider = document.getElementById("slider");
+            slider = document.getElementById("slider"),
+            imageIndex = document.getElementById("image-index");
 
         function moveDivisor() {
             const value = slider.value;
             divisor.style.clipPath = `inset(0 ${100 - value}% 0 0)`;
             handle.style.left = value + "%";
         }
-
-
 
         window.onload = function () {
             moveDivisor();
@@ -73,6 +74,9 @@
 
             slider.value = 50;
             moveDivisor();
+
+            // Update the image index display
+            imageIndex.textContent = index + 1;
         }
 
         // Event listeners for the controls
@@ -85,7 +89,6 @@
             currentPairIndex = (currentPairIndex + 1) % imagePairs.length; // Increment index, wrapping around
             updateImages(currentPairIndex);
         });
-
 
         // Initial image setup
         updateImages(currentPairIndex);
